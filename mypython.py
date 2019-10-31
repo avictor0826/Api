@@ -15,7 +15,7 @@ def mul():
 	my=my+str(num)+"*"+str(numone)+"="+str(val)
 	f=open("text.txt","a+")
 	f.write(my)
-	f.write("\n")
+	#f.write("\n")
 	f.close()
 
 	f=open("text.txt","r")
