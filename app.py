@@ -30,16 +30,7 @@ def stream():
     cc = generate()
     return Response(stream_with_context(stream_template('justst.html', fdd = cc)))
 
-@app.route('/stream')
-def streamed_response():
-    def generate():
-       with open(fileis, "r") as f:
-           while True:
-               content = f.readline()
-               yield content
-    return Response(stream_with_context(generate()))
-       
-f=open("text.txt","w+")
+f=open(fileis,"w+")
 f.close()
 
 @app.route("/multi", methods=['GET', 'POST'])
@@ -70,7 +61,7 @@ def divide():
     number1 = request.args.get("number1")
     number2 = request.args.get("number2")
     val=int(number1) / int(number2)
-    my=str(number1)+" / "+str(number2)+" = "+str(val)
+    my=str(number1)+" / "+str(number2)+" = "+str(val) + "\n"
     f=open("text.txt","a+")
     f.write(my)
     return jsonify({ "result": val})
@@ -81,11 +72,11 @@ def sub():
     number1 = request.args.get("number1")
     number2 = request.args.get("number2")
     val=int(number1) - int(number2)
-    my=str(number1)+" - "+str(number2)+" = "+str(val)
+    my=str(number1)+" - "+str(number2)+" = "+str(val) + "\n"
     f=open("text.txt","a+")
     f.write(my)
     return jsonify({ "result": val})
     
 
 if __name__=='__main__':
-    app.run(host='0.0.0.0',debug=True,threaded=True)
+    app.run(host='0.0.0.0',debug=True)
