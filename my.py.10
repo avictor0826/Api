@@ -1,0 +1,71 @@
+from flask import Flask, jsonify, request
+
+
+app = Flask(__name__)
+
+mystrn=[]
+
+
+@app.route("/multi", methods=['GET', 'POST'])
+def mul():
+	my=""
+	num = request.args.get("num")
+	numone = request.args.get("numone")
+	val=int(numone) * int(num)
+	my=my+str(num)+"*"+str(numone)+"="+str(val)
+	if len(mystrn)==10:
+		mystrn.pop(0)
+
+	mystrn.append(my)
+	#return "{} * {} = {}".format(num, numone, val)
+	return jsonify(mystrn)
+	
+@app.route("/add", methods=['GET', 'POST'])
+def add():
+	my=""
+	num = request.args.get("num")
+	numone = request.args.get("numone")
+	val=int(numone) + int(num)
+	my=my+str(num)+"+"+str(numone)+"="+str(val)
+
+	if len(mystrn)==10:
+		mystrn.pop(0)
+
+	mystrn.append(my)
+	#return "{} * {} = {}".format(num, numone, val)
+	return jsonify(mystrn)
+
+@app.route("/sub", methods=['GET', 'POST'])
+def sub():
+	my=""
+	num = request.args.get("num")
+	numone = request.args.get("numone")
+	val=int(numone) - int(num)
+	my=my+str(num)+"-"+str(numone)+"="+str(val)
+
+	if len(mystrn)==10:
+		mystrn.pop(0)
+
+	mystrn.append(my)
+	#return "{} * {} = {}".format(num, numone, val)
+	return jsonify(mystrn)
+
+
+@app.route("/div", methods=['GET', 'POST'])
+def div():
+	my=""
+	num = request.args.get("num")
+	numone = request.args.get("numone")
+	val=int(numone) / int(num)
+	my=my+str(num)+"/"+str(numone)+"="+str(val)
+
+	if len(mystrn)==10:
+		mystrn.pop(0)
+
+	mystrn.append(my)
+	#return "{} * {} = {}".format(num, numone, val)
+	return jsonify(mystrn)
+
+
+if __name__=='__main__':
+    app.run(debug=True)
